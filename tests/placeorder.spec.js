@@ -19,6 +19,7 @@ test('Validate user should be successfully able to place the order', async ({ pa
     //         break;
     //     }
     // }
+
     // Alternative way of doing the above is below
     const products = page.locator("div.card-body");
     const count = await products.count();
@@ -51,7 +52,7 @@ test('Validate user should be successfully able to place the order', async ({ pa
     await expect(page.locator(".mt-5 label")).toHaveText(userEmail);
 
     // Enter the starting chars of country sequentially
-    await page.pause();
+    await page.locator("[placeholder='Select Country']").click();
     await page.locator("[placeholder='Select Country']").pressSequentially("ind");
     
     // Store the appeared dropdown list in a variable
@@ -97,9 +98,11 @@ test('Validate user should be successfully able to place the order', async ({ pa
             break;
         }
     }
-    // Compare the actual order id 
+    // Validate the actual order id 
     const actualOrderId = await page.locator(".col-text").textContent();
     expect(orderId.includes(actualOrderId)).toBeTruthy();
+
+    // Validate the actual product
     await expect(page.locator('div.title')).toHaveText('IPHONE 13 PRO');
     // 
 });
