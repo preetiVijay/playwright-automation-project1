@@ -4,7 +4,7 @@ import { defineConfig, devices, expect } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = ({
+const config = defineConfig({
   testDir: './tests',
   /* Global timeout */
   timeout: 50 * 1000,
@@ -24,13 +24,13 @@ const config = ({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    browserName: 'chromium',
+    browserName: 'webkit',
     headless: false,
     screenshot: 'on',
     trace: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for major browsers 
   projects: [
     {
       name: 'chromium',
@@ -46,8 +46,8 @@ const config = ({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-  ],
+  ],*/
 });
 
-module.exports = {config} // expose the configuration for the entire project
+export default config; // expose the configuration for the entire project
 
